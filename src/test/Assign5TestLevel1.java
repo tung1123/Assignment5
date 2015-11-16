@@ -41,6 +41,7 @@ public class Assign5TestLevel1 extends TestCase {
  				cnt++;
  			}
  			else if(cnt == 1){
+ 				System.out.println(tuple.getAttributeValue(0));
  				assertTrue(tuple.getAttributeValue(0).equals("\"Chris\""));
  				cnt++;
  			}
