@@ -28,7 +28,7 @@ public class FormRAtree{
      */
 	public void parseText(){
 		if(!whereText.isEmpty()){
-			//split CourseEnroll.courseID = ¡§COMP2021¡¨ into three parts
+			//split CourseEnroll.courseID = â€œCOMP2021â€ into three parts
 			col = whereText.split("\\.");
 			col1 = col[1].split("\\=");
 		
