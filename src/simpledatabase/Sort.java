@@ -1,6 +1,9 @@
 package simpledatabase;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Sort extends Operator {
 
@@ -30,26 +33,22 @@ public class Sort extends Operator {
 				temp.add(tuple);
 				tuple = child.next();
 			}
-			if(temp.isEmpty())
+			if (temp.isEmpty())
 				return null;
-			tuple = temp.get(0);
-			int predicateIndex ;
-			
-			for(predicateIndex = 0;predicateIndex <tuple.getAttributeList().size(); predicateIndex++){
-				if(tuple.getAttributeName(predicateIndex).equals(orderPredicate))
-					break;
-			}
-			while(!temp.isEmpty()){
-				int min = 0;
-				for(int i = 0; i < temp.size();i++){
-					if(temp.get(i).getAttributeValue(predicateIndex).toString().compareTo(temp.get(min).getAttributeValue(predicateIndex).toString())<0)
-						min = i;
+			tuplesResult = temp;
+			Collections.sort(tuplesResult, new Comparator<Tuple>() {
+				public int compare(Tuple t1, Tuple t2) {
+					for (int i = 0; i < t1.getAttributeList().size(); i++) {
+						if (t1.getAttributeName(i).equals(orderPredicate)) 
+							return t1.getAttributeValue(i).toString().compareTo(t2.getAttributeValue(i).toString());
+						
+					}
+					return -1;
 				}
-				tuplesResult.add(temp.get(min));
-				temp.remove(min);
-			}
+
+			});
 		}
-		
+
 		return tuplesResult.remove(0);
 	}
 
